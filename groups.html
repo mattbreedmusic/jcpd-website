@@ -1,0 +1,3237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Group Classes | Joanna Forrest | Parkinson's Pro</title>
+
+  <style>
+
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --blue: #4285f0;
+      --navy: #172b4d;
+      --text: #333;
+      --muted: #666;
+      --light: #f5f7fb;
+      --white: #fff;
+      --max: 1100px;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+
+    /* =========================================================
+       STICKY SITE HEADER
+       
+       Matches the HOME PAGE header
+    ========================================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, .97);
+      border-bottom: 1px solid #e7eaf0;
+    }
+
+    .site-nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    .site-logo {
+      position: fixed;
+      height: 64px;
+      width: auto;
+      top: 0;
+      left: 11px;
+      object-fit: contain;
+      z-index: 20;
+    }
+
+
+    /* =========================================================
+       DESKTOP NAVIGATION
+    ========================================================= */
+
+    .site-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 28px;
+    }
+
+    .site-links a {
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: .08em;
+      font-weight: 700;
+      padding: 8px 0;
+    }
+
+    .site-links a:hover {
+      color: var(--blue);
+    }
+
+
+    /* =========================================================
+       HAMBURGER
+       
+       Hidden on desktop
+    ========================================================= */
+
+    .menu-toggle {
+      display: none;
+
+      width: 44px;
+      height: 44px;
+
+      padding: 0;
+
+      border: 1px solid #e1e6ed;
+      border-radius: 6px;
+
+      background: #fff;
+      color: var(--navy);
+
+      cursor: pointer;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: column;
+      gap: 5px;
+
+      position: fixed;
+      right: 14px;
+    }
+
+    .menu-toggle span {
+      display: block;
+
+      width: 21px;
+      height: 2px;
+
+      background: currentColor;
+
+      transition:
+        transform .2s ease,
+        opacity .2s ease;
+    }
+
+
+    /* =========================================================
+       HAMBURGER → X
+    ========================================================= */
+
+    .menu-toggle[aria-expanded="true"]
+    span:nth-child(1) {
+      transform:
+        translateY(7px)
+        rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"]
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"]
+    span:nth-child(3) {
+      transform:
+        translateY(-7px)
+        rotate(-45deg);
+    }
+
+
+    /* =========================================================
+       MOBILE HEADER
+       
+       Matches HOME PAGE
+    ========================================================= */
+
+    @media (max-width: 760px) {
+
+      .site-nav {
+        min-height: 70px;
+        gap: 15px;
+      }
+
+      .site-logo {
+        width: 105px;
+        height: 52px;
+        top: 6px;
+        left: -8px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .site-links {
+        position: absolute;
+
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+
+        display: none;
+
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 0;
+
+        padding: 8px 20px 14px;
+
+        border-bottom:
+          1px solid #e7eaf0;
+
+        box-shadow:
+          0 8px 18px rgba(0, 0, 0, .08);
+
+        background:
+          rgba(255, 255, 255, 0.9);
+
+        backdrop-filter:
+          blur(4px);
+      }
+
+      .site-links.is-open {
+        display: flex;
+      }
+
+      .site-links a {
+        display: block;
+
+        padding: 14px 0;
+
+        font-size: 13px;
+
+        letter-spacing: .07em;
+
+        border-bottom:
+          1px solid #eef0f4;
+      }
+
+      .site-links a:last-child {
+        border-bottom: 0;
+      }
+
+    }
+
+
+    /* =========================================================
+       PAGE INTRO
+       
+       This is deliberately a SECTION, not a HEADER.
+       It therefore does NOT inherit sticky header styling.
+    ========================================================= */
+
+    .classes-header {
+      max-width: 100%;
+      margin: 0;
+
+      padding:
+        70px 20px 65px;
+
+      text-align: center;
+
+      background:
+        var(--light);
+    }
+
+    .classes-header__eyebrow {
+      margin:
+        0 0 8px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        0.85rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        0.14em;
+
+      text-transform:
+        uppercase;
+    }
+
+    .classes-header h1 {
+      margin:
+        0 0 16px;
+
+      color:
+        var(--navy);
+
+      font-size:
+        clamp(2.2rem, 5vw, 3.5rem);
+
+      line-height:
+        1.15;
+    }
+
+    .classes-header p {
+      max-width:
+        760px;
+
+      margin:
+        0 auto;
+
+      color:
+        var(--text);
+
+      font-size:
+        1.05rem;
+    }
+
+
+    /* =========================================================
+       MAIN CONTAINER
+    ========================================================= */
+
+    .classes-container {
+  width: min(100% - 40px, var(--max));
+  margin: 0 auto;
+}
+
+
+    /* =========================================================
+       INITIAL CARD GRID
+    ========================================================= */
+
+    .classes-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 24px;
+
+      opacity: 1;
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.35s ease;
+    }
+
+
+    /* =========================================================
+       INITIAL CARD
+    ========================================================= */
+
+    .class-card {
+      overflow: hidden;
+
+      background:
+        #ffffff;
+
+      border:
+        1px solid #e1e9e5;
+
+      border-radius:
+        18px;
+
+      box-shadow:
+        0 7px 25px rgba(33, 61, 53, 0.08);
+
+      cursor:
+        pointer;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+    }
+
+    .class-card:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 14px 35px rgba(33, 61, 53, 0.14);
+    }
+
+    .class-card__image {
+      width: 100%;
+      height: 260px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #dceae6,
+          #eef4f2
+        );
+    }
+
+    .class-card__image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit:
+        cover;
+
+      transition:
+        transform 0.45s ease;
+    }
+
+    .class-card:hover
+    .class-card__image img {
+      transform:
+        scale(1.04);
+    }
+
+    .class-card__image--placeholder {
+      display: flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      color:
+        #78918a;
+
+      font-size:
+        0.9rem;
+    }
+
+
+    /* =========================================================
+       CARD TITLE
+    ========================================================= */
+
+    .class-card__title {
+      display: flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      min-height:
+        82px;
+
+      padding:
+        20px 24px;
+    }
+
+    .class-card__title h2 {
+      margin: 0;
+
+      color:
+        var(--navy);
+
+      font-size:
+        1.4rem;
+
+      line-height:
+        1.25;
+    }
+
+    .class-card__arrow {
+      flex:
+        0 0 auto;
+
+      width:
+        36px;
+
+      height:
+        36px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      border-radius:
+        50%;
+
+      background:
+        #edf5f2;
+
+      color:
+        var(--blue);
+
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .class-card__arrow::after {
+      content: "";
+
+      width:
+        8px;
+
+      height:
+        8px;
+
+      border-right:
+        2px solid currentColor;
+
+      border-top:
+        2px solid currentColor;
+
+      transform:
+        rotate(45deg);
+    }
+
+    .class-card:hover
+    .class-card__arrow {
+      background:
+        #287c6b;
+
+      color:
+        #ffffff;
+
+      transform:
+        translateX(3px);
+    }
+
+
+    /* =========================================================
+       VIEWER
+    ========================================================= */
+
+    .classes-viewer {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr) 300px;
+
+      gap:
+        28px;
+
+      align-items:
+        start;
+
+      opacity:
+        0;
+
+      transform:
+        translateY(15px);
+
+      pointer-events:
+        none;
+
+      height:
+        0;
+
+      overflow:
+        hidden;
+
+      transition:
+        opacity 0.35s ease,
+        transform 0.4s ease;
+    }
+
+
+    /* =========================================================
+       WHEN VIEWER IS ACTIVE
+    ========================================================= */
+
+    .classes-container.is-viewing
+    .classes-grid {
+      display:
+        none;
+    }
+
+    .classes-container.is-viewing
+    .classes-viewer {
+      opacity:
+        1;
+
+      transform:
+        translateY(0);
+
+      pointer-events:
+        auto;
+
+      height:
+        auto;
+
+      overflow:
+        visible;
+    }
+
+
+    /* =========================================================
+       FEATURED CLASS
+    ========================================================= */
+
+    .featured-class {
+      overflow:
+        hidden;
+
+      background:
+        #ffffff;
+
+      border:
+        1px solid #e1e9e5;
+
+      border-radius:
+        20px;
+
+      box-shadow:
+        0 10px 35px rgba(33, 61, 53, 0.10);
+
+      animation:
+        featuredIn 0.4s ease;
+    }
+
+    @keyframes featuredIn {
+
+      from {
+        opacity:
+          0;
+
+        transform:
+          translateY(10px);
+      }
+
+      to {
+        opacity:
+          1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+
+    /* =========================================================
+       FEATURED IMAGE
+    ========================================================= */
+
+    .featured-class__image {
+      width:
+        100%;
+
+      height:
+        380px;
+
+      overflow:
+        hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          #dceae6,
+          #eef4f2
+        );
+    }
+
+    .featured-class__image img {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+    }
+
+
+    /* =========================================================
+       FEATURED HEADING
+    ========================================================= */
+
+    .featured-class__heading {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      padding:
+        28px 34px 22px;
+
+      border-bottom:
+        1px solid #e7ecea;
+    }
+
+    .featured-class__heading h2 {
+      margin:
+        0;
+
+      color:
+        var(--navy);
+
+      font-size:
+        clamp(1.7rem, 3vw, 2.3rem);
+
+      line-height:
+        1.2;
+    }
+
+
+    /* =========================================================
+       BACK BUTTON
+    ========================================================= */
+
+    .back-button {
+      flex:
+        0 0 auto;
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        8px;
+
+      padding:
+        9px 14px;
+
+      border:
+        1px solid #d6e3df;
+
+      border-radius:
+        30px;
+
+      background:
+        #f5f9f7;
+
+      color:
+        var(--blue);
+
+      font-family:
+        inherit;
+
+      font-size:
+        0.82rem;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .back-button:hover {
+      background:
+        #e8f2ef;
+
+      border-color:
+        #a9c9c0;
+    }
+
+    .back-button span {
+      font-size:
+        1.1rem;
+    }
+
+
+    /* =========================================================
+       FEATURED CONTENT
+    ========================================================= */
+
+    .featured-class__content {
+      padding:
+        4px 34px 38px;
+
+      animation:
+        contentIn 0.4s ease;
+    }
+
+    @keyframes contentIn {
+
+      from {
+        opacity:
+          0;
+
+        transform:
+          translateY(6px);
+      }
+
+      to {
+        opacity:
+          1;
+
+        transform:
+          translateY(0);
+      }
+
+    }
+
+    .featured-class__content h3 {
+      margin:
+        30px 0 10px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        1.05rem;
+
+      line-height:
+        1.3;
+    }
+
+    .featured-class__content p {
+      margin:
+        0 0 16px;
+    }
+
+
+    /* =========================================================
+       DETAILS BOX
+    ========================================================= */
+
+    .class-details {
+      margin:
+        24px 0;
+
+      padding:
+        20px 22px;
+
+      background:
+        #f2f7f5;
+
+      border-left:
+        4px solid #287c6b;
+
+      border-radius:
+        0 10px 10px 0;
+    }
+
+    .class-details p {
+      margin:
+        0 0 12px;
+    }
+
+    .class-details p:last-child {
+      margin-bottom:
+        0;
+    }
+
+    .class-details strong {
+      color:
+        var(--navy);
+    }
+
+
+    /* =========================================================
+       NOTICE
+    ========================================================= */
+
+    .important-notice {
+      margin:
+        22px 0;
+
+      padding:
+        18px 20px;
+
+      background:
+        #fff8e8;
+
+      border:
+        1px solid #f0dfad;
+
+      border-radius:
+        10px;
+
+      color:
+        #594d31;
+
+      font-size:
+        0.95rem;
+    }
+
+
+    /* =========================================================
+       TESTIMONIALS
+    ========================================================= */
+
+    blockquote {
+      margin:
+        0 0 15px;
+
+      padding:
+        17px 19px;
+
+      background:
+        #f8faf9;
+
+      border-left:
+        3px solid #9bbdb4;
+
+      border-radius:
+        0 9px 9px 0;
+
+      color:
+        #53605c;
+
+      font-size:
+        0.94rem;
+
+      font-style:
+        italic;
+    }
+
+    blockquote cite {
+      display:
+        block;
+
+      margin-top:
+        7px;
+
+      color:
+        var(--blue);
+
+      font-size:
+        0.84rem;
+
+      font-style:
+        normal;
+
+      font-weight:
+        700;
+    }
+
+
+    /* =========================================================
+       CLASS NAVIGATION
+    ========================================================= */
+
+    .class-navigation {
+      position:
+        sticky;
+
+      top:
+        25px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      gap:
+        12px;
+    }
+
+    .class-navigation__title {
+      margin:
+        0 0 5px;
+
+      padding-left:
+        5px;
+
+      color:
+        var(--navy);
+
+      font-size:
+        0.9rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        0.08em;
+
+      text-transform:
+        uppercase;
+    }
+
+
+    /* =========================================================
+       NAVIGATION BUTTON
+    ========================================================= */
+
+    .class-option {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      width:
+        100%;
+
+      min-height:
+        82px;
+
+      padding:
+        0;
+
+      overflow:
+        hidden;
+
+      background:
+        #ffffff;
+
+      border:
+        1px solid #e1e9e5;
+
+      border-radius:
+        13px;
+
+      color:
+        inherit;
+
+      font-family:
+        inherit;
+
+      text-align:
+        left;
+
+      cursor:
+        pointer;
+
+      box-shadow:
+        0 4px 15px rgba(33, 61, 53, 0.05);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .class-option:hover {
+      transform:
+        translateY(-2px);
+
+      border-color:
+        #a9c9c0;
+
+      box-shadow:
+        0 8px 22px rgba(33, 61, 53, 0.10);
+    }
+
+    .class-option:focus-visible {
+      outline:
+        3px solid #287c6b;
+
+      outline-offset:
+        2px;
+    }
+
+
+    /* =========================================================
+       NAV IMAGE
+    ========================================================= */
+
+    .class-option__image {
+      flex:
+        0 0 88px;
+
+      width:
+        88px;
+
+      height:
+        82px;
+
+      overflow:
+        hidden;
+
+      background:
+        #e7f0ed;
+    }
+
+    .class-option__image img {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      object-fit:
+        cover;
+    }
+
+    .class-option__image--placeholder {
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      color:
+        #78918a;
+
+      font-size:
+        0.7rem;
+
+      text-align:
+        center;
+    }
+
+
+    /* =========================================================
+       NAV TITLE
+    ========================================================= */
+
+    .class-option__name {
+      flex:
+        1;
+
+      padding:
+        12px 14px;
+
+      color:
+        var(--navy);
+
+      font-size:
+        0.9rem;
+
+      font-weight:
+        700;
+
+      line-height:
+        1.3;
+    }
+
+
+    /* =========================================================
+       ACTIVE NAV ITEM
+    ========================================================= */
+
+    .class-option.is-active {
+      background:
+        #edf5f2;
+
+      border-color:
+        var(--blue);
+
+      box-shadow:
+        inset 4px 0 0 #287c6b,
+        0 7px 20px rgba(33, 61, 53, 0.08);
+    }
+
+    .class-option.is-active
+    .class-option__name {
+      color:
+        var(--blue);
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact {
+      background:
+        var(--navy);
+
+      color:
+        #fff;
+
+      width:
+        100vw;
+
+      margin-left:
+        calc(50% - 50vw);
+
+      padding:
+        75px 0;
+    }
+
+    .contact .container {
+      width:
+        min(100% - 40px, var(--max));
+
+      margin:
+        auto;
+    }
+
+    .contact .section-title {
+      color:
+        #fff;
+
+      text-align:
+        center;
+
+      letter-spacing:
+        .15em;
+
+      text-transform:
+        uppercase;
+
+      font-size:
+        30px;
+
+      line-height:
+        1.2;
+
+      margin:
+        0 0 18px;
+    }
+
+    form {
+      max-width:
+        720px;
+
+      margin:
+        35px auto 0;
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        16px;
+    }
+
+    input,
+    textarea,
+    select {
+      width:
+        100%;
+
+      padding:
+        14px 15px;
+
+      border:
+        0;
+
+      border-radius:
+        5px;
+
+      font:
+        inherit;
+
+      background:
+        #fff;
+
+      color:
+        #222;
+    }
+
+    textarea {
+      min-height:
+        130px;
+
+      resize:
+        vertical;
+
+      grid-column:
+        1 / -1;
+    }
+
+    .full {
+      grid-column:
+        1 / -1;
+    }
+
+    .consent {
+      display:
+        flex;
+
+      gap:
+        10px;
+
+      align-items:
+        flex-start;
+
+      font-size:
+        14px;
+
+      grid-column:
+        1 / -1;
+    }
+
+    .consent input {
+      width:
+        auto;
+
+      margin-top:
+        5px;
+    }
+
+    form button {
+      grid-column:
+        1 / -1;
+
+      border:
+        0;
+
+      border-radius:
+        5px;
+
+      padding:
+        14px 25px;
+
+      background:
+        var(--blue);
+
+      color:
+        #fff;
+
+      font-weight:
+        700;
+
+      font-size:
+        16px;
+
+      cursor:
+        pointer;
+    }
+
+    form button:hover {
+      filter:
+        brightness(.92);
+    }
+
+    .form-note {
+      text-align:
+        center;
+
+      font-size:
+        14px;
+    }
+
+    .success {
+      display:
+        none;
+
+      text-align:
+        center;
+
+      margin-top:
+        15px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer.site-footer {
+      background:
+        #111d31;
+
+      color:
+        #fff;
+
+      text-align:
+        center;
+
+      padding:
+        28px 20px;
+
+      font-size:
+        14px;
+    }
+
+    footer.site-footer p {
+      margin:
+        6px 0;
+    }
+.accreditations {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  padding: 25px 20px;
+  background: #fff;
+}
+
+.accreditations img {
+  width: auto;
+  height: 55px;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .accreditations {
+    gap: 25px;
+    padding: 20px;
+  }
+
+  .accreditations img {
+    height: 45px;
+    max-width: 100px;
+  }
+}
+
+    /* =========================================================
+       TABLET
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .classes-viewer {
+        grid-template-columns:
+          minmax(0, 1fr) 240px;
+
+        gap:
+          18px;
+      }
+
+      .featured-class__image {
+        height:
+          320px;
+      }
+
+      .featured-class__heading,
+      .featured-class__content {
+        padding-left:
+          25px;
+
+        padding-right:
+          25px;
+      }
+
+      .class-option__image {
+        flex-basis:
+          70px;
+
+        width:
+          70px;
+      }
+
+      .class-option__name {
+        font-size:
+          0.84rem;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE FORM
+    ========================================================= */
+
+    @media (max-width: 760px) {
+
+      form {
+        grid-template-columns:
+          1fr;
+      }
+
+      textarea,
+      .full,
+      .consent,
+      form button {
+        grid-column:
+          auto;
+      }
+
+    }
+
+
+    /* =========================================================
+       MOBILE GROUP CLASSES
+    ========================================================= */
+
+    @media (max-width: 700px) {
+
+      .classes-header {
+        padding:
+          50px 20px 35px;
+      }
+
+      .classes-container {
+        width:
+          calc(100% - 24px);
+      }
+
+
+      /* Initial grid */
+
+      .classes-grid {
+        grid-template-columns:
+          1fr;
+
+        gap:
+          18px;
+      }
+
+      .class-card__image {
+        height:
+          220px;
+      }
+
+
+      /* Viewer */
+
+      .classes-viewer {
+        display:
+          flex;
+
+        flex-direction:
+          column;
+
+        gap:
+          20px;
+      }
+
+      .featured-class {
+        width:
+          100%;
+      }
+
+      .featured-class__image {
+        height:
+          230px;
+      }
+
+      .featured-class__heading {
+        display:
+          block;
+
+        padding:
+          22px 20px 18px;
+      }
+
+      .featured-class__heading h2 {
+        margin-bottom:
+          15px;
+
+        font-size:
+          1.55rem;
+      }
+
+      .featured-class__content {
+        padding:
+          2px 20px 25px;
+      }
+
+
+      /* Navigation */
+
+      .class-navigation {
+        position:
+          static;
+
+        width:
+          100%;
+      }
+
+      .class-navigation__title {
+        padding-left:
+          2px;
+      }
+
+      .class-option {
+        min-height:
+          70px;
+      }
+
+      .class-option__image {
+        flex-basis:
+          76px;
+
+        width:
+          76px;
+
+        height:
+          70px;
+      }
+
+      .class-option__name {
+        padding:
+          10px 13px;
+
+        font-size:
+          0.9rem;
+      }
+
+    }
+
+
+    /* =========================================================
+       SMALL MOBILE
+    ========================================================= */
+
+    @media (max-width: 450px) {
+
+      .class-card__image {
+        height:
+          200px;
+      }
+
+      .featured-class__image {
+        height:
+          200px;
+      }
+
+      .class-details {
+        padding:
+          17px 18px;
+      }
+
+      blockquote {
+        padding:
+          15px 16px;
+      }
+
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior:
+          auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
+
+        transition-duration:
+          0.01ms !important;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =======================================================
+       STICKY SITE HEADER
+       
+       Matches the HOME PAGE
+  ======================================================== -->
+
+  <header>
+
+    <nav
+      class="site-nav"
+      aria-label="Main navigation"
+    >
+
+      <a
+        href="index.html"
+        aria-label="Home"
+      >
+
+        <img
+          class="site-logo"
+          src="/images/Google site banner2.jpg"
+          alt="JCP Physio"
+        >
+
+      </a>
+
+
+      <!-- ===================================================
+           MOBILE HAMBURGER
+      ==================================================== -->
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="site-links"
+      >
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+      </button>
+
+
+      <!-- ===================================================
+           NAVIGATION LINKS
+      ==================================================== -->
+
+      <div
+        class="site-links"
+        id="site-links"
+      >
+
+        <a href="index.html">
+          HOME
+        </a>
+
+        <a href="group-classes.html">
+          GROUP CLASSES
+        </a>
+
+        <a href="#contact">
+          CONTACT
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =======================================================
+       PAGE INTRO
+  ======================================================== -->
+
+  <section
+    class="classes-header"
+    aria-labelledby="group-classes-title"
+  >
+
+    <p class="classes-header__eyebrow">
+      Exercise &amp; Support
+    </p>
+
+    <h1 id="group-classes-title">
+      Group Classes
+    </h1>
+
+    <p>
+      Social interaction is beneficial for both wellbeing and sharing
+      experiences of everyday life living with Parkinson’s. Our groups offer
+      support, information and friendship for people with Parkinson’s, as well
+      as their partners, carers and loved ones.
+    </p>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN CLASS AREA
+  ======================================================== -->
+
+  <main
+    class="classes-container"
+    id="classes-container"
+  >
+
+
+    <!-- =====================================================
+         INITIAL GRID
+    ====================================================== -->
+
+    <section
+      class="classes-grid"
+      id="classes-grid"
+      aria-label="Available group classes"
+    >
+
+      <!-- Cards are generated from the class data below -->
+
+    </section>
+
+
+    <!-- =====================================================
+         TRANSFORMED VIEWER
+    ====================================================== -->
+
+    <section
+      class="classes-viewer"
+      id="classes-viewer"
+      aria-live="polite"
+    >
+
+      <article
+        class="featured-class"
+        id="featured-class"
+      >
+
+        <!-- Selected class appears here -->
+
+      </article>
+
+
+      <aside class="class-navigation">
+
+        <p class="class-navigation__title">
+          Other classes
+        </p>
+
+        <div id="class-navigation">
+
+          <!-- Navigation appears here -->
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
+
+    <section
+      id="contact"
+      class="contact"
+    >
+
+      <div class="container">
+
+        <h2 class="section-title">
+          Contact
+        </h2>
+
+        <p class="form-note">
+          Complete my contact form to receive a response.<br>
+          <em>I aim to respond within 3 working days</em>
+        </p>
+
+        <form id="contactForm">
+
+          <input
+            name="name"
+            type="text"
+            placeholder="Name"
+            required
+            maxlength="100"
+          >
+
+          <input
+            name="phone"
+            type="tel"
+            placeholder="Phone"
+            required
+            maxlength="50"
+          >
+
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            maxlength="250"
+          >
+
+          <input
+            name="address"
+            type="text"
+            placeholder="Address"
+            maxlength="250"
+          >
+
+          <input
+            class="full"
+            name="service"
+            type="text"
+            placeholder="Service you require"
+            required
+          >
+
+          <textarea
+            name="message"
+            placeholder="Message (optional)"
+          ></textarea>
+
+          <button type="submit">
+            Submit
+          </button>
+
+        </form>
+
+        <p
+          id="success"
+          class="success"
+        >
+          Your email application has opened. Please send it to complete the request.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <section class="accreditations">
+  <img src="/images/hcpc.png" alt="HCPC Registered">
+  <img src="/images/csp.png" alt="Chartered Society of Physiotherapy">
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>Joanna Forrest</p>
+  <p>Instagram: <a href="https://www.instagram.com/physiopdjo?cnvx=NmZhcGtuMHdiY3du">physiopdjo</a></p>
+  <p>Email: <a href="mailto:physiojo@jcpd.co.uk">physiojo@jcpd.co.uk</a></p>
+</footer>
+
+
+  <!-- =======================================================
+       CLASS DATA
+  ======================================================== -->
+
+  <script>
+
+    const classes = [
+
+      /* =====================================================
+         MOVERS & SHAKERS
+      ====================================================== */
+
+      {
+        id: "movers-shakers",
+
+        title: "Movers & Shakers",
+
+        image:
+          "/images/MoversNew.png",
+
+        imageAlt:
+          "Movers and Shakers exercise class",
+
+        content: `
+
+          <p>
+            The exercise classes provide a fantastic opportunity for social support and interaction in an environment that is dynamic, challenging and fun. Each session is designed to target symptoms head-on through specialist exercise and physiotherapy input, while helping participants build strength, confidence, mobility and independence. Most importantly, the classes create a supportive community where people can exercise together, have fun and feel empowered to stay active.
+          </p>
+
+          <div class="class-details">
+
+            <p>
+              <strong>Online:</strong><br>
+              Mondays, 10:00 - 11:00
+            </p>
+
+            <p>
+              <strong>Face to Face:</strong><br>
+              Thursdays, 13:00 - 14:00
+            </p>
+
+            <p>
+              <strong>Location:</strong><br>
+              St. Peter's Baptist Church,<br>
+              Eden Close,<br>
+              Worcester WR5 3TZ
+            </p>
+
+            <p>
+              <strong>Price:</strong><br>
+              £3.50 per session
+            </p>
+
+          </div>
+
+          <div class="important-notice">
+
+            <strong>Please note:</strong>
+            A safe to exercise form <strong>MUST</strong> be completed prior
+            to attending. Please contact Joanna Eastough via email or complete
+            our contact form below for further details.
+
+          </div>
+
+          
+
+          <h3>From our members</h3>
+
+          <blockquote>
+            “I have been attending exercise classes with Joanna for several years on behalf of Parkinson’s Uk.
+I have found her classes very beneficial in helping me to lead an active life with the challenges of Parkinson’s.
+I would not hesitate to recommend her classes as they have helped me enormously.”
+            <cite>— Anthony T</cite>
+          </blockquote>
+
+          <blockquote>
+            “I have been doing Jo’s exercise class on Zoom since 2021 when I was diagnosed with Parkinson’s. In that time Jo manages to keep the class fresh. Exercises are targeted at different problems, from balance to dexterity and building up strength. What you will experience is a challenging class, not only will it build up your strength it will give you a sense of  achievement, a good work out and an hour where you concentrate on the tasks given which  gives you a break from being conscious of your symptoms.   What a good start to the week”
+            <cite>— Wendy T</cite>
+          </blockquote>
+
+          <blockquote>
+            “I have been attending Jo’s Thursday exercise classes for just over three years. The classes are very cleverly designed to enable everyone to do as much as they can and get the maximum effect from it. 
+Jo changes the routine weekly (and the music), and is enthusiastic and encouraging. 
+Jo is very professional, hardworking, and approachable, in short she is a fantastic physio. and a safe pair of hands. 
+I have no doubt that with her help and encouragement she has made a huge difference to my physical fitness and mental wellbeing, and have no hesitation in recommending her
+”
+            <cite>— Graham C</cite>
+          </blockquote>
+
+          <blockquote>
+            "Jo’s boundless enthusiasm for her exercise classes is plain to see. At Movers and Shakers Zoom (online) and St Peter’s church (in person) she leads varied programmes of exercise. Her caring nature ensures that everyone is helped to make the most of the session.
+
+My experience has been that the sessions are enjoyable and fun even though I may not always manage all the exercises!"
+            <cite>— George P</cite>
+          </blockquote>
+
+          <blockquote>
+            "Jo uses a wide range of exercises and adapts them to the different abilities within the class. So we all come away feeling that we have had a good workout!"
+            <cite>— Lynda K</cite>
+          </blockquote>
+
+          <blockquote>
+            "I have attended Joanna's classes at St Peter's and on Zoom for many years after being diagnosed with Parkinsons  in 2018.
+Exercises are both aerobic and balance and vary to suit your capabilities. I have found that Joanna's approach and friendliness have helped considerably over the years and would recommend the classes to all."            <cite>— Barbara S</cite>
+          </blockquote>
+
+          <blockquote>
+            “I really look forward to the movers and shakers on Thursdays. I find it very beneficial. Jo takes us through a variety of exercise and always with a smile. I would not hesitate to recommend this friendly class to anyone with Parkinson’s.”
+            <cite>— Chris B</cite>
+          </blockquote>
+
+          <blockquote>
+            “I have suffered with Parkinson’s disease for 11 years and more recently have had to succumb to using a wheelchair when out and about which I find both embarrassing and frustrating. My Parkinson’s nurse suggested I should join Jo’s excercise class which I did , I have to say, reluctantly. Despite being the only participant in a wheelchair I found the class to be welcoming and Jo always adjusted the moves for my different capabilities. It has boosted my confidence and encouraged me to excercise at home and also given me the opportunity to enjoy the company of fellow sufferers. Jo is a delight and her obvious skills and lovely demeanour couldn’t fail to motivate her class"
+”
+            <cite>— David T</cite>
+          </blockquote>
+
+        `
+      },
+
+
+      /* =====================================================
+         PHYSIO-YO
+      ====================================================== */
+
+      {
+        id: "physio-yo",
+
+        title: "Physio-Yo",
+
+        image:
+          "/images/PhysioLogo.jpg",
+
+        imageAlt:
+          "Physio-Yo exercise and yoga class",
+
+        content: `
+
+          <p>
+            A specialist exercise and yoga class combining physiotherapy
+            expertise with yoga to support people living with Parkinson’s.
+          </p>
+
+          <div class="class-details">
+
+            <p>
+              <strong>Droitwich:</strong><br>
+              Tuesday, 12:00 - 13:00
+            </p>
+
+            <p>
+              <strong>Location:</strong><br>
+              The Music Box at Sunnyhill,<br>
+              Sunnyhill House,<br>
+              Stoke Road, Wychbold,<br>
+              Droitwich, WR9 0BT
+            </p>
+
+            <p>
+              Refreshments are available to purchase after the session from
+              the venue owner, with the opportunity to chat over a cuppa.
+            </p>
+
+            <p>
+              <strong>FREE Taster Session</strong>
+            </p>
+
+            <p>
+              <strong>£150</strong> — block of ten sessions
+            </p>
+
+            <p>
+              <strong>£5 per session subsidy</strong> if a member of
+              Parkinson's UK Worcester and District Branch!
+            </p>
+
+            <p>
+              Further discounts available for partners / carers.
+            </p>
+
+          </div>
+
+          <div class="important-notice">
+
+            <strong>Please note:</strong>
+            A safe to exercise form <strong>MUST</strong> be completed prior
+            to attending. Please contact us for details.
+
+          </div>
+
+          <h3>Instructors</h3>
+
+          <p>
+            <strong>Joanna Forrest</strong><br>
+            
+          </p>
+
+          <p>
+            <strong>Lisa Stone</strong><br>
+            Yoga teacher with over 20 years experience.
+          </p>
+
+          <h3>From our members</h3>
+
+          <blockquote>
+            “I was a complete novice to Yoga… I think that I attend
+            practically every session … Joanna Eastough is a qualified
+            physiotherapist who specialises in Parkinson's related exercising
+            and Lisa Stone is an experienced Yoga teacher. They both have a
+            pleasant but persuasive way of pushing you that little bit further!”
+            <cite>— Mike</cite>
+          </blockquote>
+<blockquote>
+            “I have been attending Jo & Lisa’s yoga classes for the last 3 years. No two weeks are the same, and consequently are both enjoyable and beneficial. Jo & Lisa are very professional in their approach to these classes, and are mindful of the limitations that Parkinson’s impose on us, but nevertheless get the best out of us. 
+I have no hesitation therefore in recommending these classes to anyone.
+”
+            <cite>— Graham C</cite>
+          </blockquote>
+        `
+      },
+
+
+      /* =====================================================
+         MOVERS & SHAKERS FC
+      ====================================================== */
+
+      {
+        id: "movers-shakers-fc",
+
+        title: "Movers & Shakers FC",
+
+        image: "/images/Football3.png",
+
+        imageAlt:
+          "Movers and Shakers FC",
+
+        content: `
+
+          <p>
+            <strong>An inclusive football family built on friendship, fun and positive well-being. </strong> </p> <p>
+
+Neuro Walking Football Worcestershire was established in January 2022 to encourage people living with neurological conditions, particularly Parkinson’s, to stay active through walking football. The club provides a safe, social and supportive environment where everyone is welcome, with a focus on fun, inclusivity, friendship and the many physical, social and emotional benefits of being part of a team.
+
+
+          </p>
+
+          <div class="class-details">
+
+            <p>
+              <strong>Every Wednesday:</strong><br>
+              10:30am - 12:00pm - Football </p>
+              <p>12:00pm - 1:00pm - Social in the Community Room
+            </p>
+
+            <p>
+              <strong>Location:</strong><br>
+              Worcester County Sports Ground, WR3 7SS
+            </p>
+
+            <p>
+              <strong>FREE taster session</strong>
+            </p>
+
+            <p>
+              £40 per month or £10 per session for occasional players.
+            </p>
+
+          </div>
+
+          <p>
+            Welcoming those affected by neurological conditions, from
+            Parkinson's to those recovering from a stroke. We are building a
+            community through sport to keep people physically and socially
+            active.
+          </p>
+
+          <p>
+            <strong>Contact:</strong><br>
+
+            <a href="mailto:moversandshakersfc@gmail.com">
+              moversandshakersfc@gmail.com
+            </a>
+
+          </p>
+
+        `
+      },
+
+
+      /* =====================================================
+         REDDITCH
+      ====================================================== */
+
+      {
+        id: "redditch",
+
+        title:
+          "Parkinson's UK Redditch Branch Exercise Class",
+
+        image: "/images/Redditch.jpg",
+
+        imageAlt:
+          "Redditch exercise class",
+
+        content: `
+
+          <p>
+            An exercise class offering a dynamic
+            session suitable for both seated and standing participants.
+          </p>
+
+          <div class="class-details">
+
+            <p>
+              <strong>Face to Face:</strong><br>
+              1st Wednesday of the month, 14:30 - 15:30
+            </p>
+
+            <p>
+              <strong>Location:</strong><br>
+              Oakenshaw Community Centre,<br>
+              Castleditch Lane,<br>
+              Redditch, B98 7YB
+            </p>
+
+            <p>
+              <strong>Price:</strong><br>
+              £3.50 per session, pay as you participate
+            </p>
+
+          </div>
+
+          <p>
+            This is a dynamic class catering for both seated and standing
+            participants. It incorporates strength, balance, flexibility, and
+            moderate intensity aerobic exercises.
+          </p>
+
+          <div class="important-notice">
+
+            <strong>Please note:</strong>
+            A safe to exercise form <strong>MUST</strong> be completed prior
+            to attending. Please contact Joanna Eastough via email or complete
+            our contact form below for further details.
+
+          </div>
+
+        `
+      },
+
+
+      /* =====================================================
+         MALVERN
+      ====================================================== */
+
+      {
+        id: "malvern",
+
+        title:
+          "Parkinson's UK Malvern Exercise Class",
+
+        image: "/images/Malvern.jpeg",
+
+        imageAlt:
+          "Malvern exercise class",
+
+        content: `
+
+          <div class="class-details">
+
+            <p>
+              <strong>Face to Face:</strong><br>
+              Weekly on Fridays — 10:30 to 12:00
+            </p>
+
+            <p>
+              <strong>Location:</strong><br>
+              Malvern St. James Building,<br>
+              15 Avenue Rd,<br>
+              Malvern, WR14 3BA
+            </p>
+
+            <p>
+              <strong>Price:</strong><br>
+              £3.50 per session, pay as you participate
+            </p>
+
+          </div>
+
+          <p>
+            A friendly exercise class for people with Parkinson’s plus the
+            opportunity to have a cuppa and chat afterwards.
+          </p>
+
+          <h3>Contact</h3>
+
+          <p>
+            <strong>Jenny:</strong>
+            <a href="tel:07980459874">
+              07980 459874
+            </a>
+          </p>
+
+          <p>
+            <strong>Joanna:</strong>
+            <a href="mailto:physiojo@jcpd.co.uk">
+              physiojo@jcpd.co.uk
+            </a>
+          </p>
+
+          <div class="important-notice">
+
+            <strong>Please note:</strong>
+            A safe to exercise form <strong>MUST</strong> be completed prior
+            to attending. Please contact Joanna Eastough via email or complete
+            our contact form below for further details.
+
+          </div>
+<h3>From our members</h3>
+
+          <blockquote>
+            “I have attended Jo’s Malvern PD exercise class for the past nine months. I find the class rewarding, both physically and mentally. The sessions are varied, interesting and tailored to our abilities, enabling me to identify my areas of weakness and safely rebuild my strength, balance and co-ordination by practising what we’ve learnt during the days between classes. Great work, Jo!”
+            <cite>— Richard K</cite>
+          </blockquote>
+
+          <blockquote>
+            “I've been a member of the Malvern group since the early days and I can honestly say that   it's the highlight of my week. 
+Jo is fantastic and the sessions are never boring. We never know what she's got up her sleeve! She works us quite hard but it's always possible to opt out of any exercise or do a variant which Jo suggests. Wherever you are along the Parkinson’s road,  you will feel the benefit of the class.
+Equally important is the social aspect. Firm friendships develop within the group. We're all in the same boat and do not feel inhibited asking about medical stuff, but not just that. They are a lovely group of people, and the atmosphere is relaxed, fun and supportive.
+As far as I know nobody has stopped coming because they didn't enjoy it.
+Give it a go!""
+            <cite>— Ann</cite>
+          </blockquote>
+        `
+      }
+
+
+      /* =====================================================
+         BOX POSITIVE
+
+         Currently disabled.
+      ====================================================== */
+
+      /*
+      ,{
+        id: "box-positive",
+
+        title: "Box Positive",
+
+        image: "",
+
+        imageAlt:
+          "Box Positive exercise class",
+
+        content: `
+
+          <p>
+            Group exercise classes currently take place throughout the week
+            for people with a diagnosis of Parkinson’s.
+          </p>
+
+          <p>
+            Classes are informed by the latest research and strive to
+            positively combat symptoms. Following diagnosis, people are told
+            to “stay active”, however it is difficult to know exactly what
+            to do.
+          </p>
+
+          <p>
+            At Box Positive each exercise and activity is clinically reasoned
+            to target various motor and non-motor symptoms. Charles aims to
+            maximise a person's ability to carry out everyday tasks
+            independently.
+          </p>
+
+          <p>
+            Exercises are graded to the person's ability and can be completed
+            from seated or standing. Sessions are goal directed and
+            performance is measured so that people can monitor their own
+            progress each week.
+          </p>
+
+          <p>
+            The classes are both physically and cognitively challenging, but
+            laughter and fun is key!
+          </p>
+
+          <div class="class-details">
+
+            <p>
+              <strong>
+                Live sessions at Droitwich Amateur Boxing Club:
+              </strong><br>
+              Tuesdays at 10AM
+            </p>
+
+            <p>
+              Sessions are 45 minutes in duration.
+            </p>
+
+          </div>
+
+          <p>
+            <strong>Contact:</strong><br>
+
+            <a href="mailto:charlesdelve@boxpositive.co.uk">
+              charlesdelve@boxpositive.co.uk
+            </a>
+
+          </p>
+
+        `
+      }
+      */
+    ];
+
+
+    /* =========================================================
+       ELEMENTS
+    ========================================================= */
+
+    const container =
+      document.getElementById(
+        "classes-container"
+      );
+
+    const grid =
+      document.getElementById(
+        "classes-grid"
+      );
+
+    const viewer =
+      document.getElementById(
+        "classes-viewer"
+      );
+
+    const featured =
+      document.getElementById(
+        "featured-class"
+      );
+
+    const navigation =
+      document.getElementById(
+        "class-navigation"
+      );
+
+
+    /* =========================================================
+       IMAGE HELPER
+    ========================================================= */
+
+    function createImageHTML(
+      image,
+      alt
+    ) {
+
+      if (image) {
+
+        return `
+          <img
+            src="${image}"
+            alt="${alt}"
+          >
+        `;
+
+      }
+
+      return `
+        <div
+          style="
+            width:100%;
+            height:100%;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#78918a;
+            font-size:0.85rem;
+          "
+        >
+          <!-- Add image here -->
+        </div>
+      `;
+
+    }
+
+
+    /* =========================================================
+       BUILD INITIAL GRID
+    ========================================================= */
+
+    function buildInitialGrid() {
+
+      grid.innerHTML = "";
+
+      classes.forEach(function(classItem) {
+
+        const card =
+          document.createElement("article");
+
+        card.className =
+          "class-card";
+
+        card.setAttribute(
+          "tabindex",
+          "0"
+        );
+
+        card.setAttribute(
+          "role",
+          "button"
+        );
+
+        card.setAttribute(
+          "aria-label",
+          `View ${classItem.title}`
+        );
+
+
+        card.innerHTML = `
+
+          <div class="class-card__image">
+
+            ${createImageHTML(
+              classItem.image,
+              classItem.imageAlt
+            )}
+
+          </div>
+
+          <div class="class-card__title">
+
+            <h2>
+              ${classItem.title}
+            </h2>
+
+            <span
+              class="class-card__arrow"
+              aria-hidden="true"
+            ></span>
+
+          </div>
+
+        `;
+
+
+        card.addEventListener(
+          "click",
+          function() {
+
+            openViewer(
+              classItem.id,
+              card
+            );
+
+          }
+        );
+
+
+        card.addEventListener(
+          "keydown",
+          function(event) {
+
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+
+              event.preventDefault();
+
+              openViewer(
+                classItem.id,
+                card
+              );
+
+            }
+
+          }
+        );
+
+
+        grid.appendChild(card);
+
+      });
+
+    }
+
+
+    /* =========================================================
+       OPEN VIEWER
+    ========================================================= */
+
+    function openViewer(
+      id,
+      sourceCard
+    ) {
+
+      const selected =
+        classes.find(
+          function(classItem) {
+
+            return classItem.id === id;
+
+          }
+        );
+
+
+      if (!selected) {
+        return;
+      }
+
+
+      grid.style.opacity =
+        "0";
+
+      grid.style.transform =
+        "translateY(-8px)";
+
+
+      setTimeout(function() {
+
+        container.classList.add(
+          "is-viewing"
+        );
+
+
+        renderFeatured(
+          selected
+        );
+
+
+        renderNavigation(
+          selected.id
+        );
+
+
+        setTimeout(function() {
+
+          const heading =
+            featured.querySelector("h2");
+
+          if (heading) {
+
+            heading.setAttribute(
+              "tabindex",
+              "-1"
+            );
+
+            heading.focus({
+              preventScroll: true
+            });
+
+          }
+
+        }, 350);
+
+
+      }, 250);
+
+    }
+
+
+    /* =========================================================
+       RENDER FEATURED CLASS
+    ========================================================= */
+
+    function renderFeatured(
+      classItem
+    ) {
+
+      featured.innerHTML = `
+
+        <div class="featured-class__image">
+
+          ${createImageHTML(
+            classItem.image,
+            classItem.imageAlt
+          )}
+
+        </div>
+
+
+        <div class="featured-class__heading">
+
+          <h2>
+            ${classItem.title}
+          </h2>
+
+          <button
+            class="back-button"
+            type="button"
+            id="back-to-grid"
+          >
+
+            <span aria-hidden="true">
+              ←
+            </span>
+
+            All classes
+
+          </button>
+
+        </div>
+
+
+        <div class="featured-class__content">
+
+          ${classItem.content}
+
+        </div>
+
+      `;
+
+
+      featured.style.animation =
+        "none";
+
+
+      requestAnimationFrame(
+        function() {
+
+          featured.style.animation =
+            "featuredIn 0.4s ease";
+
+        }
+      );
+
+
+      document
+        .getElementById(
+          "back-to-grid"
+        )
+        .addEventListener(
+          "click",
+          closeViewer
+        );
+
+    }
+
+
+    /* =========================================================
+       RENDER SIDEBAR
+    ========================================================= */
+
+    function renderNavigation(
+      activeId
+    ) {
+
+      navigation.innerHTML = "";
+
+
+      classes.forEach(
+        function(classItem) {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+          button.type =
+            "button";
+
+          button.className =
+            "class-option";
+
+
+          if (
+            classItem.id === activeId
+          ) {
+
+            button.classList.add(
+              "is-active"
+            );
+
+            button.setAttribute(
+              "aria-current",
+              "true"
+            );
+
+          }
+
+
+          button.innerHTML = `
+
+            <div
+              class="class-option__image
+              ${!classItem.image
+                ? "class-option__image--placeholder"
+                : ""}"
+            >
+
+              ${
+                classItem.image
+
+                  ? `
+                    <img
+                      src="${classItem.image}"
+                      alt=""
+                    >
+                  `
+
+                  : ""
+              }
+
+            </div>
+
+
+            <span
+              class="class-option__name"
+            >
+              ${classItem.title}
+            </span>
+
+          `;
+
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              switchClass(
+                classItem.id
+              );
+
+            }
+          );
+
+
+          navigation.appendChild(
+            button
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       SWITCH CLASS
+    ========================================================= */
+
+    function switchClass(
+      id
+    ) {
+
+      const selected =
+        classes.find(
+          function(classItem) {
+
+            return classItem.id === id;
+
+          }
+        );
+
+
+      if (!selected) {
+        return;
+      }
+
+
+      featured.style.opacity =
+        "0";
+
+      featured.style.transform =
+        "translateY(8px)";
+
+
+      setTimeout(
+        function() {
+
+          renderFeatured(
+            selected
+          );
+
+          renderNavigation(
+            selected.id
+          );
+
+
+          featured.style.opacity =
+            "1";
+
+          featured.style.transform =
+            "translateY(0)";
+
+
+          if (
+            window.innerWidth <= 700
+          ) {
+
+            setTimeout(
+              function() {
+
+                featured.scrollIntoView({
+                  behavior:
+                    "smooth",
+
+                  block:
+                    "start"
+                });
+
+              },
+              50
+            );
+
+          }
+
+        },
+        200
+      );
+
+    }
+
+
+    /* =========================================================
+       CLOSE VIEWER
+    ========================================================= */
+
+    function closeViewer() {
+
+      viewer.style.opacity =
+        "0";
+
+      viewer.style.transform =
+        "translateY(10px)";
+
+
+      setTimeout(
+        function() {
+
+          container.classList.remove(
+            "is-viewing"
+          );
+
+
+          grid.style.opacity =
+            "0";
+
+          grid.style.transform =
+            "translateY(8px)";
+
+
+          requestAnimationFrame(
+            function() {
+
+              requestAnimationFrame(
+                function() {
+
+                  grid.style.opacity =
+                    "1";
+
+                  grid.style.transform =
+                    "translateY(0)";
+
+                }
+              );
+
+            }
+          );
+
+
+          container.scrollIntoView({
+            behavior:
+              "smooth",
+
+            block:
+              "start"
+          });
+
+
+          setTimeout(
+            function() {
+
+              viewer.style.opacity =
+                "";
+
+              viewer.style.transform =
+                "";
+
+            },
+            500
+          );
+
+
+        },
+        250
+      );
+
+    }
+
+
+    /* =========================================================
+       INITIALISE CLASSES
+    ========================================================= */
+
+    buildInitialGrid();
+
+  </script>
+
+
+  <!-- =======================================================
+       CONTACT FORM
+  ======================================================== -->
+
+  <script>
+
+    document
+      .getElementById('contactForm')
+      .addEventListener(
+        'submit',
+        function(e) {
+
+          e.preventDefault();
+
+          const data =
+            new FormData(this);
+
+          const subject =
+            encodeURIComponent(
+              'Callback request from ' +
+              data.get('name')
+            );
+
+          const body =
+            encodeURIComponent(
+              'Name: ' +
+              data.get('name') +
+              '\n' +
+
+              'Phone: ' +
+              data.get('phone') +
+              '\n' +
+
+              'Email: ' +
+              data.get('email') +
+              '\n' +
+
+              'Address: ' +
+              data.get('address') +
+              '\n' +
+
+              'Service required: ' +
+              data.get('service') +
+              '\n' +
+
+              'Message: ' +
+              data.get('message')
+            );
+
+          window.location.href =
+            'mailto:office@parkinsonspro.co.uk?subject=' +
+            subject +
+            '&body=' +
+            body;
+
+          document
+            .getElementById('success')
+            .style.display =
+            'block';
+
+        }
+      );
+
+  </script>
+
+
+  <!-- =======================================================
+       MOBILE MENU
+       
+       Matches HOME PAGE
+  ======================================================== -->
+
+  <script>
+
+    (function () {
+
+      const button =
+        document.querySelector(
+          '.menu-toggle'
+        );
+
+      const menu =
+        document.getElementById(
+          'site-links'
+        );
+
+
+      if (!button || !menu) {
+        return;
+      }
+
+
+      /* =====================================================
+         OPEN / CLOSE MENU
+      ====================================================== */
+
+      button.addEventListener(
+        'click',
+        function () {
+
+          const isOpen =
+            button.getAttribute(
+              'aria-expanded'
+            ) === 'true';
+
+
+          button.setAttribute(
+            'aria-expanded',
+            String(!isOpen)
+          );
+
+
+          button.setAttribute(
+            'aria-label',
+            isOpen
+              ? 'Open menu'
+              : 'Close menu'
+          );
+
+
+          menu.classList.toggle(
+            'is-open',
+            !isOpen
+          );
+
+        }
+      );
+
+
+      /* =====================================================
+         CLOSE MENU AFTER LINK CLICK
+      ====================================================== */
+
+      menu
+        .querySelectorAll('a')
+        .forEach(
+          function (link) {
+
+            link.addEventListener(
+              'click',
+              function () {
+
+                button.setAttribute(
+                  'aria-expanded',
+                  'false'
+                );
+
+                button.setAttribute(
+                  'aria-label',
+                  'Open menu'
+                );
+
+                menu.classList.remove(
+                  'is-open'
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      /* =====================================================
+         CLOSE MENU WHEN RETURNING TO DESKTOP
+      ====================================================== */
+
+      window.addEventListener(
+        'resize',
+        function () {
+
+          if (
+            window.innerWidth > 760
+          ) {
+
+            button.setAttribute(
+              'aria-expanded',
+              'false'
+            );
+
+            button.setAttribute(
+              'aria-label',
+              'Open menu'
+            );
+
+            menu.classList.remove(
+              'is-open'
+            );
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+<!-- Logos -->
+</body>
+
+</html>
