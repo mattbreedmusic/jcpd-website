@@ -538,7 +538,7 @@
         <div>
           <h1>Joanna Forrest</h1>
           <p class="subtitle">BSc (Hons), MCSP, HCPC<br>Parkinson's Specialist Physiotherapist</p>
-          <p>Specialist physiotherapy support for people living with Parkinson's, with a focus on movement,
+          <p>Specialist physiotherapy support for people living with Parkinson's, with a focus on improving movement,
             independence, confidence and quality of life.</p>
           <div class="pricing">
             <div class="price-card">
@@ -546,10 +546,11 @@
               <div class="price">£85 per hour</div>
               <small>Depending on your location, a travel surcharge may apply.</small>
             </div>
-            <div class="price-card">
+           <!-- <div class="price-card">
               <div>Assessment Report</div>
               <div class="price">£30</div>
-            </div>
+            </div>-->
+
           </div>
         </div>
       </div>
@@ -558,11 +559,11 @@
     <section id="about">
       <div class="container profile">
         <div>
-          <h2>Joanna Forrest</h2>
+          <h2>About me</h2>
           <p>I am a Specialist Parkinson's Physiotherapist with a passion for rehabilitation, exercise and helping people to remain active, independent and confident while living with a neurological condition.
 
 I completed my BSc in Sports Science at the University of Wales, Swansea (now Swansea University), before graduating with a degree in Physiotherapy from the University of Birmingham in 2005.</p>
-          <p>I began my physiotherapy career within the NHS at Birmingham Heartlands and Solihull Hospitals, progressing to a senior role before moving to the Princess of Wales Community Hospital (POWCH) in Bromsgrove in 2010..</p>
+          <p>I began my physiotherapy career within the NHS at Birmingham Heartlands and Solihull Hospitals, progressing to a senior role before moving to the Princess of Wales Community Hospital (POWCH) in Bromsgrove in 2010.</p>
           <p>At POWCH, I worked within the Rehabilitation and Assessment Unit as a Rehabilitation and Falls Physiotherapist and also spent a year as a Specialist Community Falls Physiotherapist for Redditch and Bromsgrove. Alongside this, I developed and led the physiotherapy aspect of the Parkinson’s service, providing specialist exercise classes and one-to-one physiotherapy within the Rehabilitation and Assessment Unit.</p>
           <p>I was involved in developing the Complex Parkinson’s Multidisciplinary Clinic, where I worked as Lead Physiotherapist, and supported the Worcestershire Parkinson’s Specialist Nurses with complex home visits as a Parkinson’s Specialist. These experiences have given me a broad understanding of the physical, functional and wider challenges that can accompany Parkinson’s, as well as the importance of individualised, holistic support.</p>
           <p>Exercise is at the heart of my approach. I am a Level 4 Certified Postural Stability Instructor, an accredited PD Warrior Instructor and a Freestyle Fitness Yoga Instructor. I currently lead multiple weekly Parkinson’s UK Worcester Branch ‘Movers and Shakers’ exercise classes face to face and via Zoom, as well as a monthly exercise class in Redditch. I also jointly lead Physi-Yo Yoga for Parkinson’s classes in Droitwich with my professional yoga teacher colleague, Lisa Stone.</p>
@@ -633,15 +634,20 @@ I completed my BSc in Sports Science at the University of Wales, Swansea (now Sw
     <section id="contact" class="contact">
       <div class="container">
         <h2 class="section-title">Contact</h2>
-        <p class="form-note">Complete my contact form to receive a call back.<br><em>I aim to respond within 3 working
+        <p class="form-note">Complete my contact form to receive a response.<br><em>I aim to respond within 3 working
             days</em></p>
 
         <form id="contactForm">
           <input name="name" type="text" placeholder="Name" required maxlength="100">
           <input name="phone" type="tel" placeholder="Phone" required maxlength="50">
-          <input name="email" type="email" placeholder="Email" required maxlength="250">
+          <!-- <input name="email" type="email" placeholder="Email" required maxlength="250"> -->
+          <select name="service" required>
+            <option value="" disabled selected>Service you require</option>
+            <option value="Home visit">Home visit</option>
+            <option value="Groups">Groups</option>
+            <option value="Other">Other</option>
+          </select>
           <input name="address" type="text" placeholder="Address" maxlength="250">
-          <input class="full" name="service" type="text" placeholder="Service you require" required>
           <textarea name="message" placeholder="Message (optional)"></textarea>
           <button type="submit">Submit</button>
         </form>
@@ -656,6 +662,7 @@ I completed my BSc in Sports Science at the University of Wales, Swansea (now Sw
 
 <footer class="site-footer">
   <p>Joanna Forrest</p>
+  <p>Instagram: <a href="https://www.instagram.com/physiopdjo?cnvx=NmZhcGtuMHdiY3du">physiopdjo</a></p>
   <p>Email: <a href="mailto:physiojo@jcpd.co.uk">physiojo@jcpd.co.uk</a></p>
 </footer>
 
@@ -665,14 +672,15 @@ I completed my BSc in Sports Science at the University of Wales, Swansea (now Sw
       const data = new FormData(this);
       const subject = encodeURIComponent('Callback request from ' + data.get('name'));
       const body = encodeURIComponent(
-        'Name: ' + data.get('name') + '\\n' +
-        'Phone: ' + data.get('phone') + '\\n' +
-        'Email: ' + data.get('email') + '\\n' +
-        'Address: ' + data.get('address') + '\\n' +
-        'Service required: ' + data.get('service') + '\\n' +
+        'Name: ' + data.get('name') + '\n' +
+        'Phone: ' + data.get('phone') + '\n' +
+        // 'Email: ' + data.get('email') + '\n' +
+        'Address: ' + data.get('address') + '\n' +
+        'Service required: ' + data.get('service') + '\n' +
         'Message: ' + data.get('message')
       );
-      window.location.href = 'mailto:physiojo@jcpd.co.uksubject=' + subject + '&body=' + body;
+     window.location.href = 'mailto:physiojo@jcpd.co.uk?subject=' + subject + '&body=' + body;
+      // console.log('mailto:physiojo@jcpd.co.uk?subject=' + subject + '&body=' + body)
       document.getElementById('success').style.display = 'block';
     });
   </script>
