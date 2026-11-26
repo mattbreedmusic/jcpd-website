@@ -89,8 +89,8 @@
     }
 
     .portrait {
-      width: 195px;
-      height: 261px;
+      width: 292px;
+      height: 391px;
       object-fit: cover;
       margin: auto;
       border-radius: 4px;
@@ -524,7 +524,7 @@
 
       <div class="site-links" id="site-links">
         <a href="index.html">HOME</a>
-        <a href="group-classes.html">GROUP CLASSES</a>
+        <a href="groups.html">GROUP CLASSES</a>
         <a href="#contact">CONTACT</a>
       </div>
 
@@ -605,20 +605,7 @@ I completed my BSc in Sports Science at the University of Wales, Swansea (now Sw
       <div class="container">
         <h2 class="section-title">From My Clients</h2>
         <div class="quotes">
-          <blockquote>
-            “Joanna not only has a great deal of knowledge in how to sort out my balance and my movement, but also
-            understood why I was feeling so low. Her patience and experience has helped me with setting new goals that
-            are making me feel really good again. I will continue working with Joanna on a one to one basis and with the
-            Movers and Shakers sessions. Thank you so much Joanna.”
-            <footer>– John</footer>
-          </blockquote>
-          <blockquote>
-            "With enthusiasm and encouragement, Joanna explains, demonstrates and monitors us as she puts us through a
-            range of practical stretches and exercises that has improved my mobility, flexibility, muscle strength,
-            balance, posture and general fitness. Her inclusion of individuals of all abilities adds to the "psyche" of
-            belonging to a group ~ you are never alone. Thank you".
-            <footer>– Bob</footer>
-          </blockquote>
+          <!-- Populated by a script below -->
         </div>
       </div>
     </section>
@@ -665,6 +652,62 @@ I completed my BSc in Sports Science at the University of Wales, Swansea (now Sw
   <p>Instagram: <a href="https://www.instagram.com/physiopdjo?cnvx=NmZhcGtuMHdiY3du">physiopdjo</a></p>
   <p>Email: <a href="mailto:physiojo@jcpd.co.uk">physiojo@jcpd.co.uk</a></p>
 </footer>
+
+  <script>
+    // Randomly select two testimonies from master list
+    const testimonies = [
+      {
+        quote: "I have found her classes very beneficial in helping me to lead an active life with the challenges of Parkinson’s",
+        name: "Anthony T"
+      },
+      {
+        quote: "Jo is very professional, hardworking, and approachable, in short she is a fantastic physio and a safe pair of hands. ",
+        name: "Graham C"
+      },
+      {
+        quote: "Jo’s boundless enthusiasm for her exercise classes is plain to see.",
+        name: "George P"
+      },
+      {
+        quote: "Jo uses a wide range of exercises and adapts them to the different abilities within the class, so we all come away feeling that we have had a good workout!",
+        name: "Lynda K"
+      },
+      {
+        quote: "I have found that Joanna's approach and friendliness have helped considerably over the years and would recommend the classes to all.",
+        name: "Barbara S"
+      },
+      {
+        quote: "Jo takes us through a variety of exercise and always with a smile.",
+        name: "Chris B"
+      },
+      {
+        quote: "Jo is a delight and her obvious skills and lovely demeanour couldn’t fail to motivate her class",
+        name: "David T"
+      },
+      {
+        quote: "Jo is fantastic and the sessions are never boring. We never know what she's got up her sleeve!",
+        name: "Sarah J"
+      },
+      
+    ]
+    // Get container for blockquotes
+    const quotesContainer = document.querySelector("#classes .quotes")
+    // Select two different testimonials
+    const testimony1Index = Math.floor(Math.random() * testimonies.length)
+    let testimony2Index = Math.floor(Math.random() * testimonies.length)
+    while (testimony1Index === testimony2Index) {
+      testimony2Index = Math.floor(Math.random() * testimonies.length)
+    }
+    console.log("Chose 2 testimonials", testimony1Index, testimony2Index)
+    // Construct quote HTML elements
+    const testimonial1 = document.createElement("blockquote")
+    testimonial1.innerHTML = `${testimonies[testimony1Index].quote}<footer>- ${testimonies[testimony1Index].name}</footer>`
+    const testimonial2 = document.createElement("blockquote")
+    testimonial2.innerHTML = `${testimonies[testimony2Index].quote}<footer>- ${testimonies[testimony2Index].name}</footer>`
+    // Add quotes to container
+    quotesContainer.appendChild(testimonial1)
+    quotesContainer.appendChild(testimonial2)
+  </script>
 
   <script>
     document.getElementById('contactForm').addEventListener('submit', function (e) {
